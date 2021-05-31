@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 #include "Grabber.generated.h"
 
 #define OUT
@@ -27,5 +28,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+private:
+	float Reach = 100.f;
 };

@@ -1,6 +1,4 @@
 // @CGlearning
-
-
 #include "Grabber.h"
 
 // Sets default values for this component's properties
@@ -38,6 +36,22 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	UE_LOG(LogTemp, Warning, TEXT("The player viewpoint location is : %s"), *PlayerViewPointLocation.ToString());
 	UE_LOG(LogTemp, Warning, TEXT("The player viewpoint rotation is : %s"), *PlayerViewPointRotation.ToString());
+
+	//Draw Line from player showing the reach
+	
+	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(0, 255, 0),
+		false,
+		0.f,
+		0,
+		5.f
+	);
+	
 	//Ray-Cast out to a certain distance (Reach)
 
 	//See what it hits
