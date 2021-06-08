@@ -19,10 +19,8 @@ UWorldPosition::UWorldPosition()
 void UWorldPosition::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("Object Name is : %s"), *GetOwner()->GetName());
 	FVector ObjectPosition = GetOwner()->GetActorLocation();
 	FString PostionString = ObjectPosition.ToString();
-	UE_LOG(LogTemp, Warning, TEXT("Position of %s is : %s"), *GetOwner()->GetName(), *PostionString);
 }
 
 

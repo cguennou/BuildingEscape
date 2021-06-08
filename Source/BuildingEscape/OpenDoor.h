@@ -7,7 +7,10 @@
 #include "Engine/TriggerVolume.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
+#include "Components/AudioComponent.h"
 #include "OpenDoor.generated.h"
+
+#define OUT
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -19,6 +22,9 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
 
+	bool OpenDoorSound = false;
+	bool CloseDoorSound = true;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -28,6 +34,9 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void OpenDoor(float DeltaTime);
 	void CloseDoor(float DeltaTime);
+	float TotalMassOfActors() const;
+	void FindAudioComponent();
+	void FindPressurePlate();
 
 private:
 
@@ -36,13 +45,13 @@ private:
 	float DoorLastOpened = 0.f;
 
 	UPROPERTY(EditAnywhere);
+	float ThresholdMass = 50.f;
+
+	UPROPERTY(EditAnywhere);
 	float OpenAngle;
 
 	UPROPERTY(EditAnywhere);
-	ATriggerVolume* PressurePlate;
-
-	UPROPERTY(EditAnywhere);
-	AActor* ActorThatOpens;
+	ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere);
 	float DoorCloseDelay = 2.f;
@@ -52,4 +61,8 @@ private:
 
 	UPROPERTY(EditAnywhere);
 	float DoorCloseSpeed = 2.f;
+
+	UPROPERTY()
+	UAudioComponent* AudioComponent = nullptr;
+
 };
